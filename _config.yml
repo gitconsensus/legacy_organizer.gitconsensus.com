@@ -14,6 +14,7 @@ twitter_username: tedivm
 github_username:  gitconsensus/GithubOrganizer
 
 fathom_key: VFUMJ
+fathom_domain: fathom.tdvm.net
 
 # Our page is based off of this jekyll theme.
 repository: "nicolas-van/bootstrap-4-github-pages"
