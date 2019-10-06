@@ -2,8 +2,6 @@
 layout: page
 ---
 
-# Github Organization Manager
-
 The Github Organization Manager takes the pain out of managing organizations with many repositories by adding a few missing features-
 
 * Global repository settings so changes don't have to be manually applied to every repository.
