@@ -1,0 +1,40 @@
+# Welcome to Jekyll!
+#
+# For technical reasons, this file is *NOT* reloaded automatically when you use
+# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
+
+# Site settings
+title: Github Organization Manager
+email: tedivm@tedivm.com
+description: >- # this means to ignore newlines until "baseurl:"
+  The missing manager for Github Organizations.
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "" # the base hostname & protocol for your site, e.g. http://example.com
+twitter_username: tedivm
+github_username:  gitconsensus/GithubOrganizer
+
+fathom_key: VFUMJ
+
+# Our page is based off of this jekyll theme.
+repository: "nicolas-van/bootstrap-4-github-pages"
+
+# Build settings
+markdown: kramdown
+theme: minima
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-remote-theme # Lets us test remote themes locally.
+
+
+# Exclude from processing.
+# The following items will not be processed, by default. Create a custom list
+# to override the default setting.
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
