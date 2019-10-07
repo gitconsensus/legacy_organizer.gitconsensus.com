@@ -12,7 +12,7 @@ baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: tedivm
 github_username:  gitconsensus/GithubOrganizer
-
+github_app: organization-manager
 fathom_key: VFUMJ
 fathom_domain: fathom.tdvm.net
 
