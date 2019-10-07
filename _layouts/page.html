@@ -8,6 +8,6 @@ layout: default
   </header>
   {% endif %}
   <section>
-    {{ content }}
+    {% include anchor_headings.html html=content anchorBody='<i class="fas fa-link anchor"></i>' beforeHeading=false %}
   </section>
 </article>

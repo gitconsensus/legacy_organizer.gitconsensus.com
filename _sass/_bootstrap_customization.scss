@@ -330,3 +330,12 @@ legend {
 .logo-icon {
   color: $gray-800;
 }
+
+.anchor {
+  font-size: 75%;
+  color: $light;
+}
+
+.anchor:hover {
+  color: $primary;
+}
