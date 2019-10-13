@@ -68,7 +68,7 @@ repositories:
 It's also possible to set this using [repository settings](#automatically-label-repository-issues).
 
 
-### Assign Labels to Projects
+### Assign Issues to Projects
 
 Issues can get assigned to projects automatically, prevent issues from getting lost in the shuffle if someone forgets to assign one on creation. These projects can be either local repository projects or organization level projects.
 
@@ -265,5 +265,152 @@ labels:
       - infra-puppet
 ```
 
-
 It's also possible to set this using [repository settings](#automatically-label-issues). Both of these settings will work together.
+
+
+## Full Example
+
+```yaml
+
+teams:
+  Admins:
+    members:
+      - tedivm
+  Developers:
+    members:
+      - tedivm
+      - AliLynne
+  Website:
+    members:
+      - tedivm
+      - AliLynne
+
+
+
+repositories:
+
+  # All Repositories not assigned to other groups.
+  default:
+    teams_clean: true
+    teams:
+      Admins: admin
+      Developers: push
+    issues:
+      auto_label:
+        - dev
+      project_autoassign:
+        organization: true
+        name: Primary Planning
+        column: New Issues and Tasks
+    dependency_security:
+      alerts: true
+      automatic_fixes: true
+    merges:
+      allow_squash_merge: false
+      allow_merge_commit: false
+      allow_rebase_merge: true
+    features:
+      has_issues: true
+      has_wiki: false
+      has_projects: false
+      has_downloads: false
+
+  # Any repository specifically assigned to "production".
+  production:
+    extends: default
+    teams_clean: true
+    teams:
+      Admins: admin
+      Developers: pull
+    issues:
+      auto_label:
+        - dev
+        - prod
+      project_autoassign:
+        organization: true
+        name: Primary Planning
+        column: New Issues and Tasks
+    branches:
+      master:
+        enforce_admins: true
+        required_status_checks:
+          strict: true
+          require_review: true
+  website:
+    extends: default
+    teams:
+      Admins: admin
+      Website: pull
+
+  # Individual repository assignments.
+  .github: production
+  GithubOrganizer: production
+  GitConsensusService: production
+  GitConsensusCLI: production
+  organizer.gitconsensus.com: website
+  www.gitconsensus.com: website
+
+
+labels_clean: true
+
+labels:
+
+  # Built in labels.
+
+  - name: bug
+    description: "Something isn't working"
+    color: d73a4a
+
+  - name: documentation
+    description: 'Improvements or additions to documentation'
+    color: 0075ca
+    repos:
+      - organizer.gitconsensus.com
+      - www.gitconsensus.com
+
+  - name: duplicate
+    description: 'This issue or pull request already exists'
+    color: cfd3d7
+
+  - name: good first issue
+    description: 'Good for newcomers'
+    color: 7057ff
+
+  - name: enhancement
+    description: 'New feature or request'
+    color: a2eeef
+
+  - name: help wanted
+    description: 'Extra attention is needed'
+    color: 008672
+
+  - name: invalid
+    description: "This doesn't seem right"
+    color: e4e669
+
+  - name: question
+    description: "Further information is requested"
+    color: d876e3
+
+  - name: wontfix
+    description: "This will not be worked on"
+    color: ffffff
+
+
+  # Useful labels
+
+  - name: security
+    color: db5cb3
+
+  - name: refactor
+    color: db5cb3
+    repos:
+      - test_rep
+
+  - name: stability
+    color: db5cb3
+
+  - name: needs discussion
+    color: 'e08155'
+
+```
