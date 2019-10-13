@@ -8,8 +8,6 @@ title: Github Organization Manager
 email: tedivm@tedivm.com
 description: >- # this means to ignore newlines until "baseurl:"
   The missing manager for Github Organizations.
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: tedivm
 github_username:  gitconsensus/GithubOrganizer
 github_app: organization-manager
