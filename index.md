@@ -2,7 +2,7 @@
 layout: page
 ---
 
-The Github Organization Manager makes it easier to manager Github Organizations. It automatically labels and pushes issues to projects, lets you define standard labels throughout all of your repositories, and lets you define repository settings in a single place that get pushed to all your repos. This way you can be sure that things like branch protection, vulnerability scanning, and team access are set consistently throughout your organization.
+The Github Organization Manager makes it easier to manage Github Organizations. It automatically labels and pushes issues to projects, lets you define standard labels throughout all of your repositories, and lets you define repository settings in a single place that get pushed to all your repos. This way you can be sure that things like branch protection, vulnerability scanning, and team access are set consistently throughout your organization.
 
 * TOC
 {:toc}
