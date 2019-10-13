@@ -31,7 +31,7 @@ repositories:
 ```
 
 
-### Allowed Merge Types
+### Set Allowed Merge Types
 
 Organizations can enforce specific merge types, preventing people from using the wrong type accidentally.
 
@@ -162,7 +162,7 @@ repositories:
 
 
 
-### Dependency Security
+### Enforce Dependency Security
 
 A fantastic new feature of Github is that it can scan your repositories for upstream vulnerabilities and even make pull requests to resolve them. This feature is opt in, making it easy to forget. This project lets you set it on the organization level, so you never have to worry about accidentally leaving a repository vulnerable.
 
@@ -192,7 +192,7 @@ teams:
 
 ## Labels
 
-### Consistent Organization Labels
+### Manage Organization Labels
 
 Keeping labels in sync can be a huge chore when a repository has a large number of repositories. This project keeps labels in sync, optionally cleaning up labels which aren't in the organization file.
 
