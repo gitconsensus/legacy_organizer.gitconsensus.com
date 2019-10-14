@@ -21,7 +21,6 @@ Once installed you'll need to create a file named `organizer.yaml` in the `.gith
 The simplest way to get started is to set default rules for all repositories.
 
 ```yaml
-
 repositories:
   default:
     features:
@@ -34,7 +33,6 @@ repositories:
 You can also set repository specific rules. Here we disable the wiki in all repositories except for `example_repo`.
 
 ```yaml
-
 repositories:
   default:
     features:
@@ -55,7 +53,6 @@ Of course, putting individual rules for every repository can be rather burdensom
 In this example we keep the default repository settings but add a new set, `production`, which requires code reviews before pull requests get merged into the master branch.
 
 ```yaml
-
 repositories:
   default:
     features:
@@ -253,7 +250,6 @@ teams:
 Keeping labels in sync can be a huge chore when a repository has a large number of repositories. This project keeps labels in sync, optionally cleaning up labels which aren't in the organization file.
 
 ```yaml
-
 labels_clean: true
 
 labels:
