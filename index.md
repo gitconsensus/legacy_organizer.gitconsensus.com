@@ -16,6 +16,63 @@ Once installed you'll need to create a file named `organizer.yaml` in the `.gith
 
 ## Repository Settings
 
+### Organizing Repository Settings
+
+The simplest way to get started is to set default rules for all repositories.
+
+```yaml
+
+repositories:
+  default:
+    features:
+      has_issues: true
+      has_wiki: false
+      has_projects: true
+      has_downloads: true
+```
+
+You can also set repository specific rules. Here we disable the wiki in all repositories except for `example_repo`.
+
+```yaml
+
+repositories:
+  default:
+    features:
+      has_issues: true
+      has_wiki: false
+      has_projects: false
+      has_downloads: false
+  example_repo:
+    features:
+      has_issues: true
+      has_wiki: true
+      has_projects: false
+      has_downloads: false
+```
+
+Of course, putting individual rules for every repository can be rather burdensome. Another option is to define option groups- you can even extend existing option groups (like `default`) and make only the changes you need.
+
+In this example we keep the default repository settings but add a new set, `production`, which requires code reviews before pull requests get merged into the master branch.
+
+```yaml
+
+repositories:
+  default:
+    features:
+      has_issues: true
+      has_wiki: false
+      has_projects: false
+      has_downloads: false
+  production:
+    extends: default
+    branches:
+      master:
+        enforce_admins: true
+        required_status_checks:
+          require_review: true
+```
+
+
 ### Configuring Repository Features
 
 Each repository has a variety of Github features, such as projects and wikis, that this project can ensure are enabled or disabled.
@@ -48,7 +105,7 @@ repositories:
 
 ### Automatically Label Issues
 
-Issues can have labels applied automatically based off of their repository.
+Issues can have labels applied automatically based off of their repository. In this case every repository will automatically get labeled as `dev`, with two additional repositories (`example_repo` and `another_repo`) get tagged with `dev` and `production` as they inherit the production rules.
 
 ```yaml
 repositories:
@@ -115,7 +172,6 @@ repositories:
         required_status_checks:
           require_review: true
 
-
   production:
     branches:
       master:
@@ -161,7 +217,6 @@ repositories:
 ```
 
 
-
 ### Enforce Dependency Security
 
 A fantastic new feature of Github is that it can scan your repositories for upstream vulnerabilities and even make pull requests to resolve them. This feature is opt in, making it easy to forget. This project lets you set it on the organization level, so you never have to worry about accidentally leaving a repository vulnerable.
@@ -189,6 +244,7 @@ teams:
       - tedivm
       - AliLynne
 ```
+
 
 ## Labels
 
@@ -251,6 +307,7 @@ labels:
 
 ```
 
+
 ### Automatically Label Repository Issues
 
 A common request is to give all issues in a specific repository labels without having to define a per-repository set of configurations. This can be done with the `repos` setting for the label.
@@ -268,10 +325,89 @@ labels:
 It's also possible to set this using [repository settings](#automatically-label-issues). Both of these settings will work together.
 
 
-## Full Example
+## Examples
+
+### Simple Example
+
+This example applies the same rules to every repository.
 
 ```yaml
+repositories:
 
+  # All Repositories not assigned to other groups.
+  default:
+    issues:
+      auto_label:
+        - dev
+    dependency_security:
+      alerts: true
+      automatic_fixes: true
+    merges:
+      allow_squash_merge: false
+      allow_merge_commit: false
+      allow_rebase_merge: true
+    features:
+      has_issues: true
+      has_wiki: false
+      has_projects: false
+      has_downloads: false
+    branches:
+      master:
+        enforce_admins: true
+        required_status_checks:
+          strict: true
+          require_review: true
+
+
+labels_clean: true
+
+labels:
+
+  # Built in labels.
+
+  - name: bug
+    description: "Something isn't working"
+    color: d73a4a
+
+  - name: documentation
+    description: 'Improvements or additions to documentation'
+    color: 0075ca
+
+  - name: duplicate
+    description: 'This issue or pull request already exists'
+    color: cfd3d7
+
+  - name: good first issue
+    description: 'Good for newcomers'
+    color: 7057ff
+
+  - name: enhancement
+    description: 'New feature or request'
+    color: a2eeef
+
+  - name: help wanted
+    description: 'Extra attention is needed'
+    color: 008672
+
+  - name: invalid
+    description: "This doesn't seem right"
+    color: e4e669
+
+  - name: question
+    description: "Further information is requested"
+    color: d876e3
+
+  - name: wontfix
+    description: "This will not be worked on"
+    color: ffffff
+```
+
+
+### Full Example
+
+This example has one set of default repository rules, as well as special rules for production repositories and some another rule for websites. The production rules are based off of the default rules, and then the website rules extend those.
+
+```yaml
 teams:
   Admins:
     members:
@@ -284,7 +420,6 @@ teams:
     members:
       - tedivm
       - AliLynne
-
 
 
 repositories:
@@ -336,6 +471,8 @@ repositories:
         required_status_checks:
           strict: true
           require_review: true
+
+  # Give the website team access to these repos.
   website:
     extends: default
     teams:
@@ -412,5 +549,4 @@ labels:
 
   - name: needs discussion
     color: 'e08155'
-
 ```
