@@ -77,7 +77,7 @@ repositories:
 
 This project offers two ways to assign repositories to the non-default group, Repository Topics and Inline Definitions.
 
-Repository Topics let the admins of the repository assign a topic to that repo and pick up the settings based off of that. This means no changes are required to the organization's settings file. The prefix `gho-` is added to the topic (turning the `production` category into the topic `gho-production`) to tell the Github Organization Manager which settings to apply to the repository.
+[Repository Topics](https://docs.github.com/en/free-pro-team@latest/github/administering-a-repository/classifying-your-repository-with-topics) let the admins of the repository assign a topic to that repo and pick up the settings based off of that. This means no changes are required to the organization's settings file. The prefix `gho-` is added to the topic (turning the `production` category into the topic `gho-production`) to tell the Github Organization Manager which settings to apply to the repository.
 
 Another option is to define the options in the configuration file itself. The benefit of this is that settings are applied via Pull Request, which allows another level of enforcement and auditing. In this example we add `ExampleWebsite` and `.github` to the `production` category. To force people to use the config file it is also possible to disable topic assignment with the top level `topics_for_assignment` option (which is enabled by default).
 
