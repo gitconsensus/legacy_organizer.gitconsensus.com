@@ -148,10 +148,7 @@ repositories:
   production:
     issues:
       auto_label:
-        - dev
         - production
-  example_repo: production
-  another_repo: production
 ```
 
 It's also possible to set this using [repository settings](#automatically-label-repository-issues).
@@ -180,9 +177,9 @@ Another important use case is adding teams to repositories. This makes it easy t
 repositories:
   default:
     teams:
-      devs: Push # Pull, Push, Admin
-      admins: Admin # Pull, Push, Admin
-      support: Pull # Pull, Push, Admin
+      devs: Push # Write Access
+      admins: Admin # Admin Access- can change repository settings
+      support: Pull # Read only access
   production:
     teams:
       devs: Pull
@@ -191,7 +188,9 @@ repositories:
 
 ### Set Branch Protection
 
-Branch protection is an important piece of quality control, and can even be part of an organization's compliance program. Branch protection can be set globally, with additional requirements
+Branch protection is an important piece of quality control, and can even be part of an organization's compliance program.
+
+Branch options go in their own namespace inside of each option set. The name of the branch is the key, with the values being the options. Branch Protection exposed a few of those options.
 
 ```yaml
 repositories:
@@ -200,7 +199,35 @@ repositories:
       main:
         enforce_admins: false
         required_status_checks:
+          # Require a code review.
           require_review: true
+          
+        # The number of reviewers needed before merging
+        required_approving_review_count: 1
+        
+        # Require one of the code reviewers to be from the "code owners" group
+        require_code_owner_reviews: false
+        
+        # Automatically dimiss reviews when new code is committed.
+        dismiss_stale_reviews: true
+        
+        # Optionally restrict who can provid PR reviews.
+        restrictions:
+          users: []
+          teams: []
+          apps: []
+          
+          
+        # Whether to allow merge commits or not
+        required_linear_history: false
+        
+        # Used to restrict force pushes from this branch
+        allow_force_pushes: false
+        
+        # Allow this branch to be deleted. In general this should be false for protected branches.
+        allow_deletions: false
+        
+        
 
   production:
     branches:
